@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Account Deletion Instructions</title>
+<style>
+  body, html {
+    margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif;
+    display: flex; justify-content: center; align-items: center; 
+    background: #f9f9f9; text-align: center; user-select: none;
+  }
+  #container {
+    background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 420px; width: 90%;
+  }
+  .header {
+    margin-bottom: 20px;
+  }
+  h1.app-title {
+    font-size: 28px; font-weight: bold; margin: 0 0 16px; color: #333;
+  }
+  select {
+    margin-bottom: 20px; font-size: 16px; padding: 6px 12px;
+  }
+  ol {
+    text-align: left; font-size: 18px; padding-left: 20px; margin: 0 0 20px;
+  }
+  p.contact {
+    font-size: 14px; color: #555; margin: 0;
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <div class="header">
+      <h1 class="app-title" id="appTitle">SONICHUB</h1>
+    </div>
+    
+    <select id="langSelect" aria-label="Language selection">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+    </select>
+    
+    <h2 id="title">Account Deletion in the App</h2>
+    <p id="instructionText">The account and all associated data are deleted directly in the app:</p>
+    <ol id="stepsList">
+      <li>Go to the "Profile" tab.</li>
+      <li>Tap the 3 dots (menu) in the top right corner.</li>
+      <li>Select "Delete Account" and confirm the action.</li>
+    </ol>
+    <p class="contact" id="contactText">If you have questions, please email corp.doublev@gmail.com</p>
+  </div>
+
+<script>
+  const langSelect = document.getElementById('langSelect');
+  const appTitle = document.getElementById('appTitle');
+  const title = document.getElementById('title');
+  const instructionText = document.getElementById('instructionText');
+  const stepsList = document.getElementById('stepsList');
+  const contactText = document.getElementById('contactText');
+
+  const content = {
+    en: {
+      title: 'Account Deletion in the App',
+      instructionText: 'The account and all associated data are deleted directly in the app:',
+      steps: [
+        'Go to the "Profile" tab.',
+        'Tap the 3 dots (menu) in the top right corner.',
+        'Select "Delete Account" and confirm the action.'
+      ],
+      contactText: 'If you have questions, please email corp.doublev@gmail.com'
+    },
+    ru: {
+      title: 'Удаление аккаунта в приложении',
+      instructionText: 'Аккаунт и все связанные данные удаляются прямо в приложении:',
+      steps: [
+        'Зайдите на вкладку "Профиль".',
+        'Нажмите на 3 точки (меню) в правом верхнем углу.',
+        'Выберите "Удалить аккаунт" и подтвердите действие.'
+      ],
+      contactText: 'Если возникнут вопросы, пишите на corp.doublev@gmail.com'
+    }
+  };
+
+  // Set English as default
+  function setLanguage(lang) {
+    const data = content[lang];
+    document.documentElement.lang = lang;
+    title.textContent = data.title;
+    instructionText.textContent = data.instructionText;
+    stepsList.innerHTML = '';
+    data.steps.forEach(step => {
+      const li = document.createElement('li');
+      li.textContent = step;
+      stepsList.appendChild(li);
+    });
+    contactText.textContent = data.contactText;
+  }
+
+  langSelect.addEventListener('change', () => {
+    setLanguage(langSelect.value);
+  });
+
+  // Initialize with English
+  setLanguage('en');
+</script>
+</body>
+</html>
